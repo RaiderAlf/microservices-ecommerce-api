@@ -1,0 +1,11 @@
+{{> header title="Página de Servicio"}}
+
+<p class="lead">
+    {{#if servicio.estado}}
+    {{servicio.nombre}}
+    {{else}}
+    Servicio no disponible
+    {{/if}}
+</p>
+
+{{> footer year=2022}}
