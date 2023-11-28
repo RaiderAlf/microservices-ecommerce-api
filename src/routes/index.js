@@ -11,8 +11,7 @@ const { addUsersDB, loginUser, allUser } = require('../controllers/index')
 //ADMIN RENDER
 router.get("/", (req, res) => {
     res.render('main', {
-        titulo: 'Inicio con HBS',
-        prueba: 'probando algo'
+        titulo: 'Plataforma de administracion de usuarios en Ecommerce'
     })
 });
 router.get("/users", allUser);
