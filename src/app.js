@@ -13,6 +13,7 @@ server.use(bodyParser.json());
 server.use(morgan('dev'));
 server.use(cors());
 server.use(express.urlencoded({ extended: true }))
+server.use(express.static(__dirname + "/public"));
 server.use('/', router)
 
 // Motor de plantilla
@@ -26,7 +27,7 @@ hbs.registerPartials(__dirname + '/views/partials', function (err) {
 server.set('view engine', 'hbs');
 server.set("views", __dirname + "/views");
 
-server.use(express.static(__dirname + '/public'));
+console.warn(__dirname + "/public")
 
 
 module.exports = server;

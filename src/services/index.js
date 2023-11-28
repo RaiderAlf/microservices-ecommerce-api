@@ -5,6 +5,7 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 //MODELS
 const { Users } = require('../db');
+const { use } = require('../routes');
 
 //--------------------------------------------------------------
 
@@ -21,6 +22,11 @@ const cryptPass = async (pass, saltRounds = 10) => {
         console.log(error)
     }
     return null
+}
+
+const getAllDB = async () => {
+    const users = await Users.findAll({ attributes: ["id", "firstname", "lastname", "avatar", "email", "password", "createdAt", "deleted"] })
+    return sanitizeRes(users)
 }
 
 const getDB = async () => {
@@ -49,4 +55,4 @@ const addDB = async (firstname, lastname, email, password, avatar) => {
     }
 }
 
-module.exports = { getDB, addDB }
+module.exports = { getAllDB, getDB, addDB }

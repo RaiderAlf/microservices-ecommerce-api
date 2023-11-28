@@ -2,7 +2,14 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 //SERVICES
-const { getDB, addDB } = require('../services/index')
+const { getAllDB, addDB } = require('../services/index')
+
+const allUser = async (req, res) => {
+
+    res.render('users', {
+        users: await getAllDB()
+    })
+}
 
 const addUsersDB = async (req, res) => {
     const { firstname, lastname, email, password, file } = req.body
@@ -78,6 +85,7 @@ const loginUser = async (req, res) => {
 
 
 module.exports = {
+    allUser,
     addUsersDB,
     loginUser
 }
