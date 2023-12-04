@@ -5,7 +5,6 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 //MODELS
 const { Users } = require('../db');
-const { use } = require('../routes');
 
 //--------------------------------------------------------------
 
@@ -55,4 +54,31 @@ const addDB = async (firstname, lastname, email, password, avatar) => {
     }
 }
 
-module.exports = { getAllDB, getDB, addDB }
+const delDB = async (id) => {
+    try {
+        await Users.findByPk(id)
+            .then(user => {
+                if (!user) {
+                    console.log('No se encontró el usuario');
+                    return;
+                }
+
+                user.deleted = true;
+                return user.save();
+            })
+
+            .then(user => {
+                console.log('Usuario actualizado:', user);
+                return sanitizeRes(user)
+            })
+            .catch(err => {
+                throw err
+            });
+
+    } catch (error) {
+        throw error
+    }
+}
+
+
+module.exports = { getAllDB, getDB, addDB, delDB }

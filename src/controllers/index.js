@@ -1,9 +1,13 @@
 //DEPENDENCIES
 require('dotenv').config();
 const bcrypt = require('bcrypt');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 //SERVICES
-const { getAllDB, addDB } = require('../services/index')
+const { getAllDB, addDB, delDB } = require('../services/index')
 
+
+//RENDER HBS
 const allUser = async (req, res) => {
 
     res.render('users', {
@@ -11,10 +15,20 @@ const allUser = async (req, res) => {
     })
 }
 
-const addUsersDB = async (req, res) => {
-    const { firstname, lastname, email, password, file } = req.body
+const titlePag = async (req, res) => {
+    res.render('main', {
+        titulo: 'Plataforma de administracion de usuarios en Ecommerce'
+    })
+}
 
-    console.log(firstname, lastname, email, password, file)
+const loginPag = async (req, res) => {
+    res.render('login')
+}
+
+
+//RESPONSE SERVER
+const addUsersDB = async (req, res) => {
+    const { firstname, lastname, email, password } = req.body
 
     try {
         res.status(201).send({
@@ -82,10 +96,36 @@ const loginUser = async (req, res) => {
     }
 }
 
+const loginServer = async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+}
+
+const DeletedUser = async (req, res) => {
+    if (req.body.hasOwnProperty("id")) {
+        const { id } = res.body
+        try {
+            res.status(201).send({
+                message: "USER CREATED!",
+                data: await delDB(id)
+            })
+        } catch (error) {
+            res.status(404).send({
+                message: "ERROR!",
+                data: error.message
+            })
+        }
+    }
+
+}
+
 
 
 module.exports = {
+    loginPag,
+    titlePag,
     allUser,
     addUsersDB,
-    loginUser
+    loginUser,
+    DeletedUser
 }
