@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 //SERVICES
-const { getAllDB, addDB, delDB } = require('../services/index')
+const { getDB, getAllDB, addDB, delDB } = require('../services/index')
 
 
 //RENDER HBS
@@ -64,8 +64,8 @@ const loginUser = async (req, res) => {
                         } else {
 
                             res.status(400).send({
-                                ERROR: "Invalid Password",
-                                message: err
+                                ERROR: err,
+                                message: "Invalid Password"
                             });
                             return;
 
@@ -78,7 +78,7 @@ const loginUser = async (req, res) => {
 
             res.status(404).send({
                 ERROR: "Error",
-                message: "Usuario no encontrado"
+                message: "User not found"
             });
 
         } catch (error) {
