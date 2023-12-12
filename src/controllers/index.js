@@ -28,19 +28,27 @@ const loginPag = async (req, res) => {
 
 //RESPONSE SERVER
 const addUsersDB = async (req, res) => {
-    const { firstname, lastname, email, password } = req.body
+    if (req.body.hasOwnProperty("firstname") && req.body.hasOwnProperty("lastname") && req.body.hasOwnProperty("email") && req.body.hasOwnProperty("password")) {
 
-    try {
-        res.status(201).send({
-            message: "USER CREATED!",
-            data: await addDB(firstname, lastname, email, password, null)
-        })
-    } catch (error) {
-        res.status(400).send({
-            message: "ERROR!",
-            data: error.message
-        })
+        const { firstname, lastname, email, password } = req.body
+
+        try {
+            res.status(201).send({
+                message: "USER CREATED!",
+                data: await addDB(firstname, lastname, email, password, null)
+            })
+        } catch (error) {
+            res.status(400).send({
+                message: error.message,
+                data: "ERROR!"
+            })
+        }
+        return;
     }
+    res.status(400).send({
+        ERROR: "Error",
+        message: "Info missing"
+    })
 }
 
 const loginUser = async (req, res) => {
@@ -78,7 +86,7 @@ const loginUser = async (req, res) => {
 
             res.status(404).send({
                 ERROR: "Error",
-                message: "User not found"
+                message: "Email not registered"
             });
 
         } catch (error) {
