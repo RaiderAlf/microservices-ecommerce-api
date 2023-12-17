@@ -61,6 +61,7 @@ const loginUser = async (req, res) => {
             const { email, pass } = req.body
             const users = await getDB()
 
+
             for (let i = 0; i < users.length; i++) {
                 if (users[i]["email"] === email) {
 
