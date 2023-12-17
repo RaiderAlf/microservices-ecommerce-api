@@ -25,6 +25,10 @@ const loginPag = async (req, res) => {
     res.render('login')
 }
 
+const createUserPag = async (req, res) => {
+    res.render('create')
+}
+
 
 //RESPONSE SERVER
 const addUsersDB = async (req, res) => {
@@ -132,6 +136,7 @@ const DeletedUser = async (req, res) => {
 module.exports = {
     loginPag,
     titlePag,
+    createUserPag,
     allUser,
     addUsersDB,
     loginUser,

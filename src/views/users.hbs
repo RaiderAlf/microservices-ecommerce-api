@@ -1,11 +1,16 @@
-{{> header title="Página de Equipo"}}
+{{> header title="Página de Equipo" titulo="Usuarios" }}
 
 <main class="container-fluid p-4">
 
-    <h3>
-        Usuarios
-    </h3>
-    <br />
+    <div class="container-fluid">
+        <button type="button" class="btn btn-outline-primary">
+            <a href="/create" class="nav-link hover-effect">
+                Agregar Usuario
+            </a>
+        </button>
+    </div>
+
+    {{#if users}}
     <div class="table-responsive">
         <table class="table table-info table-striped table-hover rounded">
             <tr class="rounded-top">
@@ -62,6 +67,13 @@
             {{/each}}
         </table>
     </div>
+    {{else}}
+
+    <div class="d-grid place-content-center">
+
+        <span class="p-4 text-bg-danger rounded text-center m-auto ">Sin usuarios registrados</span>
+    </div>
+    {{/if}}
     </div>
 
 </main>
