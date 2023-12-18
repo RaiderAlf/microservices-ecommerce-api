@@ -52,19 +52,19 @@ const addDB = async (firstname, lastname, email, password, avatar) => {
         const mailOptions = {
             from: process.env.USER_EMAIL,
             to: email,
-            subject: 'Bienvenido a Mobile Shop',
+            subject: 'Welcome a Mobile Shop',
             html: `
-<div style="font-family: Arial, sans-serif; color: #333;">
-<h1 style="font-size: 36px; color: #4CAF50;">Hola,</h1>
-<h3 style="font-size: 16px; color: #4CAF50;">${firstname} ${lastname}</h3>
-<p>Gracias por registrarte en nuestro ecommerce. Estamos emocionados de tenerte con nosotros.</p>
-<p>Aquí encontrarás una amplia gama de productos de alta calidad. Navega por nuestras categorías para descubrir los últimos productos y ofertas.</p>
-<p>Si tienes alguna pregunta o necesitas ayuda, nuestro equipo de atención al cliente está listo para asistirte.</p>
-<p style="font-weight: bold;">¡Feliz compra!</p>
-<p>Atentamente,</p>
-<p>El equipo de <span style="color: #70CD7E ;">Mobile Shop</span></p>
-</div>
-`
+                <div style="font-family: Arial, sans-serif; color: #333;">
+                <h1 style="font-size: 36px; color: #4CAF50;">Hello,</h1>
+                <h3 style="font-size: 16px; color: #4CAF50;">${firstname} ${lastname}</h3>
+                <p>Thank you for registering with our ecommerce. We're excited to have you with us.</p>
+                <p>Here you will find a wide range of high-quality products. Browse our categories to discover the latest products and offers.</p>
+                <p>If you have any questions or need help, our customer service team is ready to assist you.</p>
+                <p style="font-weight: bold;">Happy shopping!</p>
+                <p>Sincerely,</p>
+                <p>The team at <span style="color: #70CD7E ;">Mobile Shop</span></p>
+                </div>
+            `
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
